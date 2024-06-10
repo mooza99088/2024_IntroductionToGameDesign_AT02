@@ -12,9 +12,11 @@ public class Flashlight : MonoBehaviour
     public float drainRate;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+        
         m_Light = GetComponent<Light>();
     }
 

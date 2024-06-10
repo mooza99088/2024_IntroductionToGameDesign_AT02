@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1414583739258124281}
   - component: {fileID: 1414583739261988539}
   - component: {fileID: 1414583739259966147}
-  - component: {fileID: 2008552131315386328}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -117,22 +116,3 @@ MonoBehaviour:
   lockGroup: []
   lockedInteractionClip: {fileID: 0}
   lockedOnStart: 0
---- !u!95 &2008552131315386328
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414583739260048505}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ded3c218dedaa5b4abc0a417180dfa40, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
