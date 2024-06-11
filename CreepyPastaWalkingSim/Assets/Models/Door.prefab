@@ -114,5 +114,5 @@ MonoBehaviour:
   interactionClip: {fileID: 8300000, guid: 104ae0f18e3d77d4eb99cb27de86b5c2, type: 3}
   openOnStart: 0
   lockGroup: []
-  lockedInteractionClip: {fileID: 0}
+  lockedInteractionClip: {fileID: 8300000, guid: 344d3c5b00dcb12469f97f7fb0651698, type: 3}
   lockedOnStart: 0
