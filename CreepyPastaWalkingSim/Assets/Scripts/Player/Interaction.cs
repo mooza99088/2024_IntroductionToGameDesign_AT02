@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 #region AUTHOR & COPYRIGHT DETAILS
 /// Original Author: Joshua Ferguson
@@ -25,6 +26,12 @@ public class Interaction : MonoBehaviour, ILoggable
     [SerializeField] private float distance = 3f;
     [Tooltip("The layers to query for interactions.")]
     [SerializeField] private LayerMask interactionLayers;
+    [Tooltip("The image component representing the crosshair.")]
+    [SerializeField] private Image crosshair;
+    [Tooltip("The color of the crosshair when not looking at an interactable object.")]
+    [SerializeField] private Color defaultColor = Color.red;
+    [Tooltip("The color of the crosshair when looking at an interactable object.")]
+    [SerializeField] private Color interactableColor = Color.white;
 
     private Interactable engagedInteraction;
 
@@ -40,11 +47,20 @@ public class Interaction : MonoBehaviour, ILoggable
                 Debug.DrawRay(transform.position, transform.forward * distance, Color.green, 0.2f);
             }
 
+            if (hitInfo.transform != null && hitInfo.transform.TryGetComponent(out IInteractable target))
+            {
+                SetCrosshairColor(interactableColor);
+            }
+            else
+            {
+                SetCrosshairColor(defaultColor);
+            }
+
             if (Input.GetButtonDown("Interaction") == true)
             {
                 if (engagedInteraction == null)
                 {
-                    if (hitInfo.transform.TryGetComponent(out IInteractable target) == true)
+                    if (hitInfo.transform.TryGetComponent(out target) == true)
                     {
                         if (target.OnInteract(out engagedInteraction) == true)
                         {
@@ -52,11 +68,15 @@ public class Interaction : MonoBehaviour, ILoggable
                         }
                     }
                 }
-                else if(engagedInteraction.OnDisengageInteraction() == true)
+                else if (engagedInteraction.OnDisengageInteraction() == true)
                 {
                     engagedInteraction = null;
                 }
             }
+        }
+        else
+        {
+            SetCrosshairColor(defaultColor);
         }
     }
 
@@ -74,7 +94,8 @@ public class Interaction : MonoBehaviour, ILoggable
         {
             switch (level)
             {
-                default: case 0:
+                default:
+                case 0:
                     Debug.Log($"[PLAYER INTERACTION] - {gameObject.name}: {message}");
                     break;
                 case 1:
@@ -84,6 +105,18 @@ public class Interaction : MonoBehaviour, ILoggable
                     Debug.LogError($"[PLAYER INTERACTION] - {gameObject.name}: {message}");
                     break;
             }
+        }
+    }
+
+    /// <summary>
+    /// Sets the crosshair color.
+    /// </summary>
+    /// <param name="color">The color to set the crosshair to.</param>
+    private void SetCrosshairColor(Color color)
+    {
+        if (crosshair != null)
+        {
+            crosshair.color = color;
         }
     }
 }
