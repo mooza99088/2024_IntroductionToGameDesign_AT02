@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour, ILoggable
     {
         if (gameState == 0)
         {
+            Debug.Log("You win");
             gameState = 1;
             StartCoroutine(StartGameCompleteSequence());
         }
@@ -120,6 +122,7 @@ public class GameManager : MonoBehaviour, ILoggable
     {
         if (gameState == 0)
         {
+            Debug.Log("You lose");
             gameState = -1;
             StartCoroutine(StartGameOverSequence());
         }
