@@ -37,7 +37,7 @@ public class VHSPostProcessEffect : MonoBehaviour
 		{
 			_yScanline = Random.value;
 		}
-		if (_xScanline <= 0 || Random.value < 0.05)
+		if (_xScanline <= 0 || Random.value < 0.01)
 		{
 			_xScanline = Random.value;
 		}

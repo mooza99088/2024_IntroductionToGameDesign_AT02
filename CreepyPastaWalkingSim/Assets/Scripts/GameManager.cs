@@ -30,13 +30,15 @@ public class GameManager : MonoBehaviour, ILoggable
     [Tooltip("The amount of time the player will idle for before game restarts after game loss.")]
     [SerializeField] private float gameOverStateDuration = 3f;
     [Tooltip("The amount of time the player will idle for after game completion, before the camera cuts to black.")]
-    [SerializeField] private float timeToAuthorCard = 3f;
+    [SerializeField] private float timeToAuthorCard = 1f;
     [Tooltip("The amount of time the author card text will appear on screen before the game restarts.")]
-    [SerializeField] private float authorCardDuration = 5f;
+    [SerializeField] private float authorCardDuration = 2f;
     [Tooltip("The text that will appear on tlhe author card when the game is finished.")]
     [SerializeField][TextArea] private string authorCardText;
 
     private int gameState = 0;
+    public GameObject losePanel;
+    public GameObject winPanel;
 
     /// <summary>
     /// Static event called when the player completes the game.
@@ -50,6 +52,20 @@ public class GameManager : MonoBehaviour, ILoggable
     /// Static event called at the end of the game when the player completes the game.
     /// </summary>
     public static event AuthorCardDelegate AuthorCardEvent = delegate { };
+
+
+    private void Start()
+    {
+        // Ensure the panels are disabled at the start of the game
+        if (losePanel != null)
+        {
+            losePanel.SetActive(false);
+        }
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
+        }
+    }
 
     /// <summary>
     /// Update is called once per frame.
@@ -111,6 +127,7 @@ public class GameManager : MonoBehaviour, ILoggable
         {
             Debug.Log("You win");
             gameState = 1;
+            winPanel.SetActive(true);
             StartCoroutine(StartGameCompleteSequence());
         }
     }
@@ -124,6 +141,7 @@ public class GameManager : MonoBehaviour, ILoggable
         {
             Debug.Log("You lose");
             gameState = -1;
+            losePanel.SetActive(true);
             StartCoroutine(StartGameOverSequence());
         }
     }
