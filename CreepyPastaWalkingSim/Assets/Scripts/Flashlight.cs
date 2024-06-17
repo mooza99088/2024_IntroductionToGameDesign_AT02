@@ -16,8 +16,8 @@ public class Flashlight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         m_Light = GetComponent<Light>();
+        m_Light.enabled = false;
     }
 
     // Update is called once per frame
